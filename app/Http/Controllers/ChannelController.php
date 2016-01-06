@@ -55,10 +55,10 @@ class ChannelController extends Controller
      */
     public function edit($id) {
         $channel = Channel::findOrFail($id);
-        $tags = Tag::lists('name', 'id');
-        $tag_list = $channel->tags->lists('name');
-
-        return view('channels.edit', compact('channel', 'tags', 'tag_list'));
+        $tags = Tag::lists('name', 'id')->all();
+        $selected_tag_list = $channel->tags->lists('name', 'id');
+        //dd($selected_tag_list);
+        return view('channels.edit', compact('channel', 'tags', 'selected_tag_list'));
     }
     /** 
      * Update the channel
