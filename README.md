@@ -1,4 +1,4 @@
-Met
+Meta
 ======
 Install composer as follows
 curl -sS https://getcomposer.org/installer | php
