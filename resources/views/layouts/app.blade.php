@@ -51,6 +51,8 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/') }}">Home</a></li>
+                    <li><a href="{{ url('/contact') }}">Contact</a></li>
+                    <li><a href="{{ url('/about') }}">About</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

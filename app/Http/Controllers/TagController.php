@@ -11,6 +11,16 @@ use App\Http\Controllers\Controller;
 
 class TagController extends Controller
 {
+
+    /** 
+    * Create a new TagController instance
+    * @param 
+    */
+    // TODO    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //
         /** 
     * List the tags 
@@ -40,7 +50,10 @@ class TagController extends Controller
      */
     public function create() {
         $tags = Tag::lists('name');
-    	return view('tags.create', compact('tags'));
+        //TODO The following line should be removed or refactored since getTagListAttribute
+        // is supposed to handle this
+        $tag_list = Tag::lists('name', 'id');
+        return view('tags.create', compact('tags', 'tag_list'));
     }
     /** 
      * Save the tag
@@ -59,7 +72,8 @@ class TagController extends Controller
      */
     public function edit($id) {
         $tag = Tag::findOrFail($id);
-        return view('tags.edit', compact('tag'));
+        $tag_list = Tag::lists('name', 'id');
+        return view('tags.edit', compact('tag', 'tag_list'));
     }
     /** 
      * Update the tag

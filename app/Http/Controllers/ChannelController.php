@@ -14,7 +14,10 @@ class ChannelController extends Controller
     * @param 
     */
     // TODO    
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /** 
     * List the channels
     * @param 
@@ -39,7 +42,10 @@ class ChannelController extends Controller
      */
     public function create() {
         $tags = Tag::lists('name', 'id');
-    	return view('channels.create', compact('tags'));
+        //TODO The following line should be removed or refactored since getTagListAttribute
+        // is supposed to handle this
+        $tag_list = Tag::lists('name', 'id');
+    	return view('channels.create', compact('tags', 'tag_list'));
     }
     /** 
      * Save the channel
@@ -56,9 +62,8 @@ class ChannelController extends Controller
     public function edit($id) {
         $channel = Channel::findOrFail($id);
         $tags = Tag::lists('name', 'id')->all();
-        $selected_tag_list = $channel->tags->lists('name', 'id');
-        //dd($selected_tag_list);
-        return view('channels.edit', compact('channel', 'tags', 'selected_tag_list'));
+        $tag_list = $channel->tags->lists('name', 'id');
+        return view('channels.edit', compact('channel', 'tags', 'tag_list'));
     }
     /** 
      * Update the channel
@@ -67,6 +72,7 @@ class ChannelController extends Controller
      */
     public function update($id, ChannelRequest $request) {
        $channel = Channel::findOrFail($id);
+       $channel->update($request->all());
        $this->syncTags($channel, $request->input('tag_list'));
        return redirect('channels');
     }

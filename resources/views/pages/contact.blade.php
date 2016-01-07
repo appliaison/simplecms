@@ -1,11 +1,17 @@
-@extends('app')
-
+@extends('layouts.app')
 @section('content')
-                <div class="title">Contact</div>
 
-@stop
+<div class="container spark-screen">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">Contact</div>
 
-
-@section('footer')
-@stop
-
+                <div class="panel-body">
+                  <p>You may contact us for enquiries</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
